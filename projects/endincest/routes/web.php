@@ -32,3 +32,8 @@ Route::namespace ('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])-
 Route::namespace ('User')->prefix('user')->name('user.')->group(function () {
 		Route::get('userdash', 'UserController@userdash');
 	});
+Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
+Route::get('/editprofile', 'Profile\ProfileController@editprofile')->name('editprofile');
+Route::patch('/updateprofile/{id}', 'Profile\ProfileController@updateprofile')->name('updateprofile');
+Route::get('/viewimage', 'Profile\ProfileController@viewimage')->name('viewimage');
+Route::post('/addimage', 'Profile\ProfileController@addimage')->name('addimage');
