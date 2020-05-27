@@ -5,12 +5,18 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 
 use auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 use Image;
 
 class ProfileController extends Controller {
+
+	protected $validationRules = [
+		'current-password' => 'required',
+		'new-password'     => 'required',
+	];
 
 	public function index() {
 
@@ -26,11 +32,6 @@ class ProfileController extends Controller {
 	public function updateprofile(Request $request) {
 		$user = Auth::user();
 
-		$this->validate($request, [
-				'name'  => 'required|max:255'.$user->id,
-				'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-
-			]);
 		$this->validate($request, ['profile_pic' => 'required']);
 
 		if ($request->hasFile('profile_pic')) {
@@ -52,8 +53,6 @@ class ProfileController extends Controller {
 
 	public function addimage(Request $request) {
 
-		$this->validate($request, ['profile_pic' => 'required']);
-
 		if ($request->hasFile('profile_pic')) {
 
 			$file     = $request->file('profile_pic');
@@ -74,4 +73,37 @@ class ProfileController extends Controller {
 	public function viewimage() {
 		return view('profile.viewimage');
 	}
+
+	public function showChangePasswordForm() {
+
+		return view('auth.passwords.changepassword');
+	}
+
+	public function changePassword(Request $request) {
+
+		if (!(Hash::check($request->get('current_password'), Auth::user()->password))) {
+			// The passwords matches
+
+			return redirect()->back()->with("error", "Your current password does not matches with the password you provided. Please try again.");
+		}
+
+		if (strcmp($request->get('current_password'), $request->get('new_password')) == 0) {
+			//Current password and new password are same
+			return redirect()->back()->with("error", "New Password cannot be same as your current password. Please choose a different password.");
+		}
+
+		$validatedData = $request->validate([
+				'current_password' => 'required',
+				'new_password'     => 'required|string|min:6|confirmed',
+			]);
+
+		//Change Password
+		$user           = Auth::user();
+		$user->password = bcrypt($request->get('new_password'));
+		$user->save();
+
+		return redirect()->back()->with("success", "Password changed successfully !");
+
+	}
+
 }

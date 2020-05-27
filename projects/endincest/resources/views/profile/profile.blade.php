@@ -16,7 +16,7 @@
                      <div class="image">
 
                      	@if(empty(auth::user()->profile_pic))
-         <a href="{{URL::to('/viewimage')}}"><img src="{{asset('dist/img/profile.png')}}" style='width:70px' class="img-circle elevation-2" alt="User Image"></a>@endif
+         <a href="{{URL::to('/viewimage')}}"><img src="{{asset('dist/img/profile.png')}}" style='width:70px;float: left;' class="img-circle elevation-2" alt="User Image"></a>@endif
 
 
           @if(!empty(auth::user()->profile_pic))

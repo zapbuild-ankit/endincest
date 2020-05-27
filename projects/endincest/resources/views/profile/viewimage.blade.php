@@ -1,5 +1,6 @@
 @extends('layouts.admin')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+ <script src='http://parsleyjs.org/dist/parsley.js'></script>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,14 +9,14 @@
                 <div class="card-header">{{ __('ADD IMAGE') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/addimage') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/addimage') }}" enctype="multipart/form-data" id="form">
                         @csrf
 
                         <div class="form-group row">
                             <label for="profile_pic" class="col-md-4 col-form-label text-md-right">{{ __('') }}</label>
 
                             <div class="col-md-6">
-                                <input id="profile_pic" type="file" class="form-control @error('name') is-invalid @enderror" name="profile_pic" value="{{ old('profile_pic') }}" required autocomplete="profile_pic" autofocus>
+                                <input id="profile_pic" type="file" name='profile_pic'class="form-control" required parsley-trigger="keyup" >
 
                                 @error('')
                                     <span class="invalid-feedback" role="alert">
@@ -47,4 +48,5 @@
         </ul>
     </div>
 @endif
+<script src="{{ asset('js/validation.js')}}"></script>
 @endsection

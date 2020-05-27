@@ -15,25 +15,24 @@ Route::get('/', function () {
 		return view('welcome');
 	});
 
-Auth::routes(['verify' => true]);
+Route::get('/home', function () {
+		return view('welcome');
+	});
 
 Route::get('/admin', function () {
 		return 'you are admin';
 	})->middleware(['auth', 'auth.admin']);
 
-Route::namespace ('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function () {
-		Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
-	});
-
-Route::namespace ('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function () {
-		Route::get('admindash', 'AdminController@admindash');
-	});
-
-Route::namespace ('User')->prefix('user')->name('user.')->group(function () {
-		Route::get('userdash', 'UserController@userdash');
-	});
+Route::get('/admin/admindash', 'Admin\AdminController@admindash')->middleware(['auth', 'auth.admin'])->name('admin');
+Route::get('user/userdash', 'User\UserController@userdash')->name('user');
 Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
 Route::get('/editprofile', 'Profile\ProfileController@editprofile')->name('editprofile');
-Route::patch('/updateprofile/{id}', 'Profile\ProfileController@updateprofile')->name('updateprofile');
+Route::patch('/updateprofile', 'Profile\ProfileController@updateprofile')->name('updateprofile');
 Route::get('/viewimage', 'Profile\ProfileController@viewimage')->name('viewimage');
 Route::post('/addimage', 'Profile\ProfileController@addimage')->name('addimage');
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/changepassword', 'Profile\ProfileController@showChangePasswordForm');
+Route::post('/changepassword', 'Profile\ProfileController@changePassword')->name('changePassword');
