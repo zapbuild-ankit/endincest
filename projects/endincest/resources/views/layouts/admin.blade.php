@@ -22,11 +22,22 @@
   <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+
+
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.css" />
+
+
+
+
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -200,6 +211,37 @@
 
           </li>
 
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class=" nav-icon fas fa-grip-horizontal"></i>
+              <p>
+                Event
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+
+              <li class="nav-item">
+                <a href="/eventschedule" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Schedule</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/eventspeakers" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Speakers</p>
+                </a>
+              </li>
+
+
+            </ul>
+          </li>
+
+
+
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -255,11 +297,12 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; <a href="http://adminlte.io">Zapbuild</a>.</strong>
+    <strong>Copyright &copy; <a href="https://www.zapbuild.com">Zapbuild</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.5
@@ -275,6 +318,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
+
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -296,6 +341,8 @@
 <!-- daterangepicker -->
 <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
 <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+
+<script src="{{asset('plugins/datetimepicker/jquery.datetimepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
@@ -308,6 +355,13 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
- <script src='http://parsleyjs.org/dist/parsley.js'></script>
-</body>
+
+ <script src="{{asset('plugins/parsley/parsley.js')}}"></script>
+
+ <script src="{{ asset('js/validation.js')}}"></script>
+ <script src="{{ asset('js/datetimepicker.js')}}"></script>
+
+
+
+
 </html>

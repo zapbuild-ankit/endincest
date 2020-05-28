@@ -36,3 +36,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/changepassword', 'Profile\ProfileController@showChangePasswordForm');
 Route::post('/changepassword', 'Profile\ProfileController@changePassword')->name('changePassword');
+Route::get('/eventform', 'Admin\AdminController@eventform')->name('eventform');
+Route::post('/addevent', 'Admin\AdminController@addevent')->name('addevent');
+
+Route::get('/eventschedule', 'Admin\AdminController@eventschedule')->name('events');
+Route::delete('/destroyevent/{id}', 'Admin\AdminController@destroy')->name('destroyevent');
+Route::get('/editevent/{id}', 'Admin\AdminController@editeventform')->name('editevent');
+Route::patch('/updateevent/{id}', 'Admin\AdminController@updateevent')->name('updateevent');
