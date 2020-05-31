@@ -35,7 +35,7 @@
 </div>
   <div class="form-group {{ $errors->has('profile_pic') ? ' has-error' : '' }}">
         <label for="profile_pic" class="control-label"><b>Profile Image:</b></label>
-        <input type="file" name="profile_pic" placeholder="Upload Image" class="form-control" value="{{ $user->profile_pic }}"required data-parsley-trigger="keyup"/>
+        <input type="file" name="profile_pic" id="image" placeholder="Upload Image" class="form-control" value="{{ $user->profile_pic }}"required data-parsley-trigger="keyup"/>
 
 <?php if ($errors->has('profile_pic')):?>
 <span class="help-block">

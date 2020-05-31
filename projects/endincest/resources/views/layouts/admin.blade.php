@@ -181,7 +181,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if(empty(auth::user()->profile_pic))
-         <a href="{{URL::to('/addimage')}}"><img src="{{asset('dist/img/profile.png')}}" style='width:70px;' class="img-circle elevation-2" alt="User Image"></a>@endif
+         <a href="{{URL::to('/viewimage')}}"><img src="{{asset('dist/img/profile.png')}}" style='width:70px;' class="img-circle elevation-2" alt="User Image"></a>@endif
 
 
           @if(!empty(auth::user()->profile_pic))
@@ -264,7 +264,7 @@
               <li class="nav-item">
                 <a href="/changepassword" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Reset Password</p>
+                  <p>Change Password</p>
                 </a>
               </li>
 
@@ -357,11 +357,10 @@
 <script src="{{asset('dist/js/demo.js')}}"></script>
 
  <script src="{{asset('plugins/parsley/parsley.js')}}"></script>
+  <script src="{{asset('plugins/jquery-validation/jquery.validate.js')}}"></script>
 
  <script src="{{ asset('js/validation.js')}}"></script>
- <script src="{{ asset('js/datetimepicker.js')}}"></script>
 
-
-
+<script src="{{asset('plugins/datetimepicker/jquery.datetimepicker.js')}}"></script>
 
 </html>

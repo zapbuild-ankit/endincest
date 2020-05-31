@@ -15,7 +15,7 @@
     </div>
     <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
         <label for="name" class="control-label"><b>Event Name:</b></label>
-        <input type="text" name="name" placeholder="Please enter event name" class="form-control" value="" required data-parsley-pattern="[a-zA-Z]+$"data-parsley-trigger="keyup"/>
+        <input type="text" name="name" placeholder="Please enter event name" class="form-control" value="" required data-parsley-pattern="[a-zA-Z]+$" data-parsley-length="[4,16]" data-parsley-trigger="keyup"/>
 
 <?php if ($errors->has('name')):?>
 <span class="help-block">
@@ -25,7 +25,7 @@
 </div>
     <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
         <label for="description" class="control-label"><b>Description:</b></label>
-        <input type="description" name="description" placeholder="Please enter  Description " class="form-control" value="" required data-parsley-trigger="keyup"/>
+        <textarea name="description" form="form" placeholder="Please enter  Description " class="form-control"  required data-parsley-length="[10,500]" data-parsley-trigger="keyup"></textarea>
 
 <?php if ($errors->has('description')):?>
 <span class="help-block">
@@ -35,7 +35,7 @@
 </div>
 <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
         <label for="location" class="control-label"><b>Location:</b></label>
-        <input type="location" name="location" placeholder="Please enter Location " class="form-control" value="" required data-parsley-trigger="keyup"/>
+        <input type="text" name="location" placeholder="Please enter Location " class="form-control" value="" required data-parsley-length="[3,16]" data-parsley-trigger="keyup"/>
 
 <?php if ($errors->has('location')):?>
 <span class="help-block">
@@ -45,7 +45,7 @@
 </div>
 <div class="form-group {{ $errors->has('speaker') ? ' has-error' : '' }}">
         <label for="speaker" class="control-label"><b>Speaker:</b></label>
-        <input type="speaker" name="speaker" placeholder="Please enter  speaker name" class="form-control" value="" required data-parsley-trigger="keyup"/>
+        <input type="text" name="speaker" placeholder="Please enter  speaker name" class="form-control" value="" required data-parsley-length="[4,16]" data-parsley-trigger="keyup"/>
 
 <?php if ($errors->has('speaker')):?>
 <span class="help-block">
@@ -55,7 +55,7 @@
 </div>
 <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
         <label for="start_date" class="control-label"><b>Begining:</b></label>
-        <input type="start_date" name="start_date" placeholder="Please enter  Start date " class="form-control datetimepicker" value="" required data-parsley-trigger="keyup"/>
+        <input type="text" name="start_date" placeholder="Please enter  Start date " class="form-control datetimepicker" value="" required  data-parsley-trigger="keyup" focus="first"/>
 
 <?php if ($errors->has('start_date')):?>
 <span class="help-block">
@@ -75,7 +75,7 @@
 </div>
   <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
         <label for="image" class="control-label"><b>Related Image:</b></label>
-        <input type="file" name="image" placeholder="Upload Image" class="form-control" value=""required data-parsley-trigger="keyup"/>
+        <input type="file" name="image" id="image" placeholder="Upload Image" class="form-control" value=""required  data-parsley-trigger="keyup"/>
 
 <?php if ($errors->has('image')):?>
 <span class="help-block">
@@ -126,23 +126,19 @@
 </div>
 <script>
 
- $(".datetimepicker").datetimepicker({
+ $(".datetimepicker").datetimepicker({onClose: function() { this.focus(); },
        dateFormat: 'yy-mm-dd',
        timeFormat: 'hh:mm:ss',
+
+
+
       });
 
 </script>
-<script>
-$('#btn').click(function () {
-    if ($('input[name=status]:checked').length <= 0) {
-        $('input[name=status]').css('outline', '1px solid red');
-    }
-    else {
-        $('input[name=status]').css('outline', 'none');
 
-    }
-});
-</script>
+
+
+
 @endsection
 
 

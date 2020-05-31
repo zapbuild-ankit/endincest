@@ -2392,7 +2392,7 @@
       alphanum: "This value should be alphanumeric."
     },
     notblank: "This value should not be blank.",
-    required: "This value is required.",
+    required: "This Field is required.",
     pattern: "This value seems to be invalid.",
     min: "This value should be greater than or equal to %s.",
     max: "This value should be lower than or equal to %s.",
@@ -2405,6 +2405,7 @@
     check: "You must select between %s and %s choices.",
     equalto: "This value should be the same.",
     euvatin: "It's not a valid VAT Identification Number."
+    
   });
   Parsley.setLocale('en');
 
