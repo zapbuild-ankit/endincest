@@ -271,6 +271,16 @@
 
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="{{route('ExportView')}}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Export Data
+
+              </p>
+            </a>
+
+          </li>
 
 
           <li class="nav-header">ACTION</li>
