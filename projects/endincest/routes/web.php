@@ -23,9 +23,9 @@ Route::get('/admin', function () {
 		return 'you are admin';
 	})->middleware(['auth', 'auth.admin']);
 
-Route::get('export', 'Admin\ExportController@export')->name('export');
+Route::get('export_csv', 'Admin\ExportController@export_csv')->name('export_csv');
 Route::get('ExportView', 'Admin\ExportController@ExportView')->name('ExportView');
-Route::get('exportpdf', 'Admin\ExportController@export_pdf')->name('exportpdf');
+Route::get('export_pdf', 'Admin\ExportController@export_pdf')->name('export_pdf');
 Route::get('/admin/admindash', 'Admin\AdminController@admindash')->middleware(['auth', 'auth.admin'])->name('admin');
 Route::get('user/userdash', 'User\UserController@userdash')->name('user');
 Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
