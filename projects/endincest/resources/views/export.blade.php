@@ -7,8 +7,10 @@
             <p>All Users</p>
         </div>
 
-        <a href="{{ route('export') }}" class ="btn btn-primary pull-right">Export as CSV</a>
-        <a href="{{ route('exportpdf') }}" class ="btn btn-primary pull-right">Export as PDF</a>
+
+        <button onclick="Exportcsv()" class="btn btn-primary">Export to CSV File</button>
+        <button onclick="Exportpdf()" class="btn btn-primary">Export to PDF File</button>
+
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -49,4 +51,28 @@
               </div>
           </div>
       </div>
+       <script>
+        function Exportcsv()
+        {
+            var conf = confirm("Export users to CSV?");
+            if(conf == true)
+            {
+                window.open("export_csv", '_blank');
+            }
+        }
+
+        function Exportpdf()
+        {
+          var conf = confirm("Export users to PDF?");
+            if(conf == true)
+            {
+                window.open("export_pdf", '_blank');
+            }
+        }
+
+         </script>
+
+
+
+
       @endsection
