@@ -19,10 +19,8 @@ Route::get('/home', function () {
 		return view('welcome');
 	});
 
-Route::get('/admin', function () {
-		return 'you are admin';
-	})->middleware(['auth', 'auth.admin']);
-
+Route::get('cropimage', 'ImageController@index')->name('cropimage');
+Route::post('upload', 'ImageController@upload')->name('upload');
 Route::get('export_csv', 'Admin\ExportController@export_csv')->name('export_csv');
 Route::get('ExportView', 'Admin\ExportController@ExportView')->name('ExportView');
 Route::get('export_pdf', 'Admin\ExportController@export_pdf')->name('export_pdf');
