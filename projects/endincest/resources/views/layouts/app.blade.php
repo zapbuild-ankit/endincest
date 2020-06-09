@@ -9,16 +9,29 @@
 
     <title>{{ config('app.name', 'endincest') }}</title>
 
-    <!-- Scripts -->
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
+     <!-- Fonts -->
+     <!-- Font Awesome -->
 
-
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
+
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+
+
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+   <script src="{{asset('plugins/jquery-validation/jquery.validate.js')}}"></script>
+
+
+
+
 
 </head>
 <body>
@@ -62,10 +75,10 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
                         @endguest
@@ -79,6 +92,72 @@
             @yield('content')
         </main>
     </div>
+<script>
 
+
+        $.validator.addMethod("letters_numbers_special", function(value, element) {
+            return this.optional(element) || /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/.test(value);
+        }, "");
+
+        jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value.indexOf(" ") < 0 && value != "";
+        }, "No space please and don't leave it empty");
+
+        $.validator.addMethod('filesize', function (value, element, param) {
+            console.log(element.files[0].size);
+             return this.optional(element) || (element.files[0].size <= param)
+        }, 'File size must be less than {0}');
+
+        /*add only letters validation*/
+        $.validator.addMethod("lettersonly", function(value, element) {
+            return this.optional(element) || /^[a-z\s]+$/i.test(value);
+        });
+        $.validator.addMethod("onlyCharacter", function (value, element) {
+            return /^(?!\d+$)(?:[a-zA-Z ]*)?$/.test(value);
+        }, "Please enter character only"),
+
+        $.validator.addMethod("valid_contact_number", function (value, element) {
+                return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+            }, "Please enter valid contact number"),
+
+        $.validator.addMethod("removeHtml", function (value, element) {
+                return /^[a-zA-Z0-9 !@#$&()\\-`.+,/\"]*$/.test(value);
+            }, "Please enter character only");
+        //Login Validation
+        $("#login_form").validate({
+            rules: {
+
+                email: {
+                    required: true,
+                    email:true
+
+                },
+                password:{
+                    required:true,
+                    letters_numbers_special:true,
+                    noSpace:true,
+                },
+            },
+            messages:{
+
+                email: {
+                    required: "Please enter Email",
+                    email:"Please fill correct email."
+                },
+                password: {
+                    required:"Please enter password.",
+                    letters_numbers_special:"Password must contain one special character,uppercase and number.",
+
+                },
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
+
+        </script>
+        <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>
