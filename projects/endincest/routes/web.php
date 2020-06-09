@@ -44,3 +44,11 @@ Route::get('/eventschedule', 'Admin\AdminController@eventschedule')->name('event
 Route::delete('/destroyevent/{id}', 'Admin\AdminController@destroy')->name('destroyevent');
 Route::get('/editevent/{id}', 'Admin\AdminController@editeventform')->name('editevent');
 Route::patch('/updateevent/{id}', 'Admin\AdminController@updateevent')->name('updateevent');
+
+// Facebook socialite
+Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('fblogin');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+
+//Google socialite
+Route::get('auth/google', 'Auth\LoginController@redirectToGoogle')->name('googlelogin');
+Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
