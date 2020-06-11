@@ -49,6 +49,9 @@ Route::patch('/updateevent/{id}', 'Admin\AdminController@updateevent')->name('up
 Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('fblogin');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
 
-//Google socialite
+//Google Login using socialite
 Route::get('auth/google', 'Auth\LoginController@redirectToGoogle')->name('googlelogin');
 Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+//Google Login using google API Client
+Route::get('auth/google/callback', 'Auth\LoginController@googlelogin')->name('glogin');
