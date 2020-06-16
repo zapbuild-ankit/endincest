@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 use App\Location;
 use Illuminate\Http\Request;
+use Validator;
 
 class GoogleMapController extends Controller {
 
 	//Method to show the Google map with select options of location
 
-	function CreateMap() {
+	function create_map() {
 		$locations = Location::all();
 
 		return view('google_map.google_map', compact('locations'));
@@ -16,19 +17,35 @@ class GoogleMapController extends Controller {
 
 	//Method to send coordinates according to selected cities
 
-	function LocationCoords(Request $request) {
+	function location_coords(Request $request) {
 
-		if ($request->ajax()) {
+		$validator = Validator::make($request->all(), [
+				'city' => 'required',
+			]);
 
-			$cityval = $request->cityval;
+		if ($validator->passes()) {
 
-			$col = Location::where('city', $cityval)->first();
+			if ($request->ajax()) {
 
-			$lat = $col->lat;
-			$lng = $col->lng;
-			return response()->json([$lat, $lng]);
-			//return [$lat, $lng];
+				$cityval = $request->city;
 
+				if (!empty($cityval)) {
+
+					$col = Location::where('city', $cityval)->first();
+
+					if (!empty($col)) {
+
+						$lat = $col->lat;
+						$lng = $col->lng;
+						return response()->json([$lat, $lng]);
+
+					}
+				}
+
+			}
+
+		} else {
+			return response()->json(['error' => $validator->errors()->all()]);
 		}
 
 	}
