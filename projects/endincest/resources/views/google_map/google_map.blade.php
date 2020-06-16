@@ -9,7 +9,7 @@
 	</div>
 	<!--Form for selecting places-->
 
-	<form method="POST" id="find" action="{{route('LocationCoords')}}" aria-label="{{ __('My form') }}">
+	<form method="POST" id="find" action="{{route('location_coords')}}" aria-label="{{ __('My form') }}">
     @csrf
 
     <div class="form-group row">
@@ -17,7 +17,7 @@
 
         <div class="col-md-12">
             <select class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" id ="city" name="city">
-
+              <option value="" disabled selected hidden>Select a City</option>
               @foreach($locations as $location)
               <option value="{{ $location->city}}" > {{ $location->city }}</option>
               @endforeach
@@ -30,9 +30,14 @@
             @endif
         </div>
     </div>
+    <div>
 <button type="submit" id="searchcity" class="btn btn-success btn-md">Find</button>
 </form>
-
+</div>
+<br>
+  <div class="alert alert-danger print-error-msg" style="display:none">
+        <ul></ul>
+    </div>
 
 	</div>
 @endsection
