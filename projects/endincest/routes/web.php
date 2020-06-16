@@ -19,9 +19,9 @@ Route::get('/home', function () {
 		return view('welcome');
 	});
 
-Route::get('gmap', 'GoogleMapController@CreateMap')->name('gmap');
+Route::get('gmap', 'GoogleMapController@create_map')->name('gmap');
 
-Route::post('LocationCoords', 'GoogleMapController@LocationCoords')->name('LocationCoords');
+Route::post('location_coords', 'GoogleMapController@location_coords')->name('location_coords');
 
 Route::get('cropimage', 'ImageController@index')->name('cropimage');
 Route::post('upload', 'ImageController@upload')->name('upload');
