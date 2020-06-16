@@ -15,7 +15,7 @@ $(document).ready(function()
         }
 
         else{
-        	alert('Browser not supported');
+        	console.log('Browser not supported');
         }
 	}
 
