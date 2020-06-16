@@ -19,6 +19,10 @@ Route::get('/home', function () {
 		return view('welcome');
 	});
 
+Route::get('gmap', 'GoogleMapController@CreateMap')->name('gmap');
+
+Route::post('LocationCoords', 'GoogleMapController@LocationCoords')->name('LocationCoords');
+
 Route::get('cropimage', 'ImageController@index')->name('cropimage');
 Route::post('upload', 'ImageController@upload')->name('upload');
 Route::get('export_csv', 'Admin\ExportController@export_csv')->name('export_csv');
