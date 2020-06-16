@@ -45,13 +45,6 @@
 
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
-<!--Google APi
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEZI-_MwW1YZgVNAIQxRqDiiUGr1jIls&libraries=places,geometry" async defer></script>-->
-
-
-
-
-
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
 
