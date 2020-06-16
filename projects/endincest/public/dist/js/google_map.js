@@ -30,7 +30,7 @@ $(document).ready(function()
 
 	function fail()
 	{
-		alert('Failed');
+		console.log('Failed');
 	}
 
  myLatLng=new google.maps.LatLng(-33.6,151.2);
@@ -116,14 +116,18 @@ var cityval=$('#city').val();
             
 var _token = $('input[name=_token]').val();
  $.ajax({
-        url:"LocationCoords",
+        url:"location_coords",
         method:'POST',
 
-        data:{"cityval":cityval,_token:_token},
+        data:{"city":cityval,_token:_token},
         dataType:"json",
 
         success:function(match){
-        var myLatLng=new google.maps.LatLng(match[0],match[1]);
+
+        	if($.isEmptyObject(match.error)){
+
+             $('.print-error-msg').remove();
+            var myLatLng=new google.maps.LatLng(match[0],match[1]);
 
         	createMap(myLatLng);
         	type='school';
@@ -133,11 +137,32 @@ var _token = $('input[name=_token]').val();
         	createMarker(myLatLng,icn,name);
         	nearbySearch(myLatLng,type);
         	}
-      
+
+        	else{
+        		printErrorMsg(match.error);
+        	}
+      }
+
+
 
         });
 
 
 });
+
+
+  function printErrorMsg (msg) {
+
+            $(".print-error-msg").find("ul").html('');
+
+            $(".print-error-msg").css('display','block');
+
+            $.each( msg, function( key, value ) {
+
+                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+
+            });
+
+        }
 
 });
