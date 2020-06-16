@@ -25,6 +25,10 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 
+   <!-- Google Map Css -->
+
+   <link rel='stylesheet' href="{{asset('dist/css/google_map.css')}}">
+
 
 
    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" />
@@ -40,6 +44,14 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+<!--Google APi
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEZI-_MwW1YZgVNAIQxRqDiiUGr1jIls&libraries=places,geometry" async defer></script>-->
+
+
+
+
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
 
@@ -50,6 +62,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
+
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -300,6 +313,18 @@
           </li>
 
 
+            <li class="nav-item">
+            <a href="{{route('gmap')}}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Google Map
+
+              </p>
+            </a>
+
+          </li>
+
+
           <li class="nav-header">ACTION</li>
           <li class="nav-item">
              <a class="nav-link" href="{{ route('logout') }}"
@@ -390,4 +415,9 @@
 <script src="{{asset('plugins/datetimepicker/jquery.datetimepicker.js')}}"></script>
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
+
+     <!--Google Map js-->
+
+<script src="{{asset('dist/js/google_map.js')}}"></script>
+
 </html>
