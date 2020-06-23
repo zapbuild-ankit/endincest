@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,6 +44,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+<!--Google APi-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEZI-_MwW1YZgVNAIQxRqDiiUGr1jIls&libraries=places,geometry" async defer></script>
+
+
+
+
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
@@ -316,6 +323,16 @@
             </a>
 
           </li>
+          <li class="nav-item">
+            <a href="{{route('messages')}}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                SMS Notification
+
+              </p>
+            </a>
+
+          </li>
 
 
           <li class="nav-header">ACTION</li>
@@ -412,5 +429,92 @@
      <!--Google Map js-->
 
 <script src="{{asset('dist/js/google_map.js')}}"></script>
+<script>
+
+
+        $.validator.addMethod("letters_numbers_special", function(value, element) {
+            return this.optional(element) || /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/.test(value);
+        }, "");
+
+        jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value.indexOf(" ") < 0 && value != "";
+        }, "No space please and don't leave it empty");
+
+        $.validator.addMethod('filesize', function (value, element, param) {
+            console.log(element.files[0].size);
+             return this.optional(element) || (element.files[0].size <= param)
+        }, 'File size must be less than {0}');
+
+        /*add only letters validation*/
+        $.validator.addMethod("lettersonly", function(value, element) {
+            return this.optional(element) || /^[a-z\s]+$/i.test(value);
+        });
+        $.validator.addMethod("onlyCharacter", function (value, element) {
+            return /^(?!\d+$)(?:[a-zA-Z ]*)?$/.test(value);
+        }, "Please enter character only"),
+
+        $.validator.addMethod("valid_contact_number", function (value, element) {
+                return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+            }, "Please enter valid contact number"),
+
+        $.validator.addMethod("removeHtml", function (value, element) {
+                return /^[a-zA-Z0-9 !@#$&()\\-`.+,/\"]*$/.test(value);
+            }, "Please enter character only");
+        //phone register validation
+        $("#register_phone").validate({
+            rules: {
+
+                phone_number: {
+                    required: true,
+
+
+                },
+
+            },
+            messages:{
+
+                phone_number: {
+                    required: "Please enter Phone number",
+
+                },
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
+        $("#message").validate({
+            rules: {
+
+                "users[]": "required" ,
+
+                body:{
+
+                     required: true,
+                },
+
+            },
+            messages:{
+
+                "users[]":"please select users",
+
+
+                 body:{
+
+                     required: "Please enter message",
+                },
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
+
+        </script>
+
 
 </html>
