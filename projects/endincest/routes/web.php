@@ -52,6 +52,7 @@ Route::patch('/updateevent/{id}', 'Admin\AdminController@updateevent')->name('up
 // Facebook socialite
 Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('fblogin');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+//Route::get('login/facebook/callback', 'Auth\LoginController@redirectTo');
 
 //Google Login using socialite
 Route::get('auth/google', 'Auth\LoginController@redirectToGoogle')->name('googlelogin');
@@ -59,3 +60,9 @@ Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 //Google Login using google API Client
 Route::get('auth/google/callback', 'Auth\LoginController@googlelogin')->name('glogin');
+Route::get('feeds', 'FeedController@feeds');
+
+//Mesage section
+Route::get('/messages', 'MessageController@show')->name('messages');
+Route::post('/storePhoneNumber', 'MessageController@storePhoneNumber')->name('storePhoneNumber');
+Route::post('/custom', 'MessageController@sendCustomMessage');
