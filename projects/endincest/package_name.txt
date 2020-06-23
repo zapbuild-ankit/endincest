@@ -3,3 +3,13 @@ socialite package
 
 Google api client
 2.composer require google/apiclient:^2.0
+
+Message notification
+3. composer require twilio/sdk
+
+->if curl is not installed then install A/c to php -v
+
+sudo apt-get install php7.2-curl
+ 
+
+
