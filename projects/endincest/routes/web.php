@@ -66,3 +66,10 @@ Route::get('feeds', 'FeedController@feeds');
 Route::get('/messages', 'MessageController@show')->name('messages');
 Route::post('/storePhoneNumber', 'MessageController@storePhoneNumber')->name('storePhoneNumber');
 Route::post('/custom', 'MessageController@sendCustomMessage');
+
+//paypal section
+
+Route::get('/order', 'PaypalController@index')->name('order');
+Route::post('payment', 'PaypalController@payment')->name('payment');
+Route::get('cancel', 'PaypalController@cancel')->name('payment.cancel');
+Route::get('payment/success', 'PaypalController@success')->name('payment.success');
