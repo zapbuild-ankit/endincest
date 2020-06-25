@@ -315,7 +315,7 @@
 
             <li class="nav-item">
             <a href="{{route('gmap')}}" class="nav-link">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fa fa-map-marker"></i>
               <p>
                 Google Map
 
@@ -325,9 +325,20 @@
           </li>
           <li class="nav-item">
             <a href="{{route('messages')}}" class="nav-link">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon far fa-envelope"></i>
               <p>
                 SMS Notification
+
+              </p>
+            </a>
+
+          </li>
+
+           <li class="nav-item">
+            <a href="{{route('order')}}" class="nav-link">
+              <i class="nav-icon far fa-handshake"></i>
+              <p>
+                  Paypal Payment
 
               </p>
             </a>
@@ -512,6 +523,24 @@
                     form.submit();
                 }
         });
+        $("#paypal_amount").validate({
+            rules: {
+
+                "amount": "required" ,
+
+            },
+            messages:{
+
+                "amount":"Please enter amount",
+
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
 
 
         </script>
