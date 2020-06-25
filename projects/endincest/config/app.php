@@ -186,6 +186,7 @@ return [
 		Intervention\Image\ImageServiceProvider::class ,
 		Maatwebsite\Excel\ExcelServiceProvider::class ,
 		Laravel\Socialite\SocialiteServiceProvider::class ,
+		Srmklive\PayPal\Providers\PayPalServiceProvider::class
 
 	],
 
