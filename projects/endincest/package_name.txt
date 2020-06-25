@@ -10,6 +10,9 @@ Message notification
 ->if curl is not installed then install A/c to php -v
 
 sudo apt-get install php7.2-curl
+
+4. paypal payment 
+composer require srmklive/paypal
  
 
 
