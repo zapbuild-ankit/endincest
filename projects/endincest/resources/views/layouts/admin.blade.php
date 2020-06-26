@@ -29,6 +29,9 @@
 
    <link rel='stylesheet' href="{{asset('dist/css/google_map.css')}}">
 
+<!--Whatsapp css -->
+   <link rel='stylesheet' href="{{asset('dist/css/whatsapp.css')}}">
+
 
 
    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" />
@@ -344,6 +347,16 @@
             </a>
 
           </li>
+          <li class="nav-item">
+            <a href="{{route('whatsapp')}}" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                  Whatsapp Message
+
+              </p>
+            </a>
+
+          </li>
 
 
           <li class="nav-header">ACTION</li>
@@ -468,6 +481,10 @@
                 return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
             }, "Please enter valid contact number"),
 
+         $.validator.addMethod("valid_whatsapp_number", function (value, element) {
+                return /^\(?([0-9]{2})\)?[-. ]?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+            }, "Please enter valid whatsapp number with country code"),
+
         $.validator.addMethod("removeHtml", function (value, element) {
                 return /^[a-zA-Z0-9 !@#$&()\\-`.+,/\"]*$/.test(value);
             }, "Please enter character only");
@@ -539,6 +556,32 @@
                 submitHandler: function(form) {
                     form.submit();
                 }
+        });
+
+        $("#whatsapp").validate({
+            rules: {
+
+                number:{
+                  required:true,
+                  valid_whatsapp_number:true,
+
+                },
+                "message":"required",
+
+            },
+            messages:{
+
+              number:{
+                required:"Please enter whatsapp number with country code",
+                valid_whatsapp_number:"please enter valid whatsapp number with country code",
+              },
+
+                "message":"Please enter message",
+
+
+
+            },
+
         });
 
 
