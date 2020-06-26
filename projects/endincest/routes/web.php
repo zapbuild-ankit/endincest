@@ -73,3 +73,9 @@ Route::get('/order', 'PaypalController@index')->name('order');
 Route::post('payment', 'PaypalController@payment')->name('payment');
 Route::get('cancel', 'PaypalController@cancel')->name('payment.cancel');
 Route::get('payment/success', 'PaypalController@success')->name('payment.success');
+
+//whatsapp section
+Route::get('/whatsapp', 'WhatsappController@index')->name('whatsapp');
+Route::get('/group', 'WhatsappController@group')->name('group');
+Route::post('/message', 'WhatsappController@sendMessage')->name('message');
+Route::get('/welcome', 'WhatsappController@welcome')->name('welcome');
