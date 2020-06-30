@@ -1,73 +1,28 @@
 /********** whatsapp section here **************/
 .whatsapp {
-    padding: 60px 0;
+    padding: 30px 0;
+    margin-left: 30px;
     text-align: center;
 }
-.whatsapp-inner{display:inline-block;padding-bottom: 100px;vertical-align:top;width:100%;}
-.whatsapp-img {
-    float: left;
-    width: 284px;
-}
-.whatsapp-content, .section-content {
-    font-size: 16px;
-    line-height: 25px;
-}
-.whatsapp-content {
-    padding-left: 344px;
-    text-align: left;
-}
-.single-whatsapp {
-    padding-right: 15px;
-}
-.single-whatsapp::after {
-    background: #d9d9d9;
-    content: "";
-    display: block;
-    height: 4px;
-    margin: 20px 0;
-    width: 95px;
-}
-.single-whatsapp:last-child::after{display:none;}
-.whatsapp-teller {
-    color: #a4a4a4;
-    font-style: italic;
-}
-.section-subtitle {
-    color: #ef464d;
-    font-family: Conv_CharlemagneStd-Bold;
-    font-size: 18px;
-}
-.section-subtitle > span {
-    font-size: 24px;
-}
-.whatsapp-content > p {
-    margin-bottom: 25px;
-    padding: 0 30px;
-}
-.section-content p a {color:#f14b51;}
-.whatsapp-content > p:last-child{margin:0px;}
+
 /************* Share whatsapp section here *************/
-.whatsapp {
+.whatsapp-back {
     background: url("../img/whatsappback.jpg") no-repeat;background-size:cover;
 }
-.whatsapp-img {
-    margin: -100px 0 0 -30px;
-}
+
 .whatsapp-form-div {
-    display: table;padding: 60px 0;
+    display: table;padding: 0px 0;
     width: 95%;
 }
 .whatsapp-title {
     display: table-cell;
     font-family: Conv_RobotoCondensed-Regular;
     vertical-align: top;
-    width: 260px;
+    width: 0px;
+    padding-right: : 10px;
+    margin-left: : 100px;
 }
-.whatsapp-title > span {
-    display: block;
-    font-size: 66px;margin: 0 0 5px;
-    text-transform: uppercase;
-}
+
 .bold{font-family: Conv_RobotoCondensed-Bold;}
 .color-red{color: #ef464d;}
 .whatsapp-form .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
