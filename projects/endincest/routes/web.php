@@ -79,3 +79,9 @@ Route::get('/whatsapp', 'WhatsappController@index')->name('whatsapp');
 Route::get('/group', 'WhatsappController@group')->name('group');
 Route::post('/message', 'WhatsappController@sendMessage')->name('message');
 Route::get('/welcome', 'WhatsappController@welcome')->name('welcome');
+
+//Import section
+
+Route::get('/import', 'ImportController@import_form')->name('import');
+Route::post('/import_csv', 'ImportController@import_csv')->name('import_csv');
+Route::post('/import_xlsx', 'ImportController@import_xlsx')->name('import_xlsx');
