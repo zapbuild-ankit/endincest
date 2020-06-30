@@ -52,12 +52,16 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfEZI-_MwW1YZgVNAIQxRqDiiUGr1jIls&libraries=places,geometry" async defer></script>
 
 
-
-
-
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
 
+<style>
+  .error{
+    color:red;
+    font-style:italic;
+    font-size:16px;
+  }
+</style>
 
 
 </head>
@@ -304,6 +308,17 @@
 
           </li>
 
+          <li class="nav-item">
+            <a href="{{route('import')}}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Import Data
+
+              </p>
+            </a>
+
+          </li>
+
             <li class="nav-item">
             <a href="{{route('cropimage')}}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
@@ -339,7 +354,7 @@
 
            <li class="nav-item">
             <a href="{{route('order')}}" class="nav-link">
-              <i class="nav-icon far fa-handshake"></i>
+              <i class="nav-icon fab fa-paypal"></i>
               <p>
                   Paypal Payment
 
@@ -349,7 +364,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('whatsapp')}}" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
+              <i class="nav-icon fab fa-whatsapp"></i>
               <p>
                   Whatsapp Message
 
@@ -488,6 +503,8 @@
         $.validator.addMethod("removeHtml", function (value, element) {
                 return /^[a-zA-Z0-9 !@#$&()\\-`.+,/\"]*$/.test(value);
             }, "Please enter character only");
+
+
         //phone register validation
         $("#register_phone").validate({
             rules: {
@@ -583,6 +600,7 @@
             },
 
         });
+
 
 
 
