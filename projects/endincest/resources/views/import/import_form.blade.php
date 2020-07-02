@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 @section('content')
+
+<div class="app-title">
+        <div>
+            <h1 ><i class="fa fa-tags"></i>Import Data</h1>
+
+        </div>
+        </div>
 <!--csv section start here-->
 @if (session('success'))
     <div class="col-sm-12">
@@ -22,7 +29,7 @@
     </div>
 @endif
 
-                <div class="row">
+                <div class="row-2">
                 <div class="col-7">
                     <div class="card">
                         <div class="card-header">
