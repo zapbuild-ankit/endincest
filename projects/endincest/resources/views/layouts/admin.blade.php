@@ -606,5 +606,13 @@
 
         </script>
 
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<!--Whatsapp chat widget-->
+
+<div class="elfsight-app-46172e8b-7803-4449-b666-3e963e2c519a"></div>
+
+<!--Messenger chat widget-->
+
+<div class="elfsight-app-fe280e5d-fdaa-43ad-81a2-30d8668c1dca"></div>
 
 </html>
