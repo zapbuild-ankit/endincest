@@ -83,5 +83,4 @@ Route::get('/welcome', 'WhatsappController@welcome')->name('welcome');
 //Import section
 
 Route::get('/import', 'ImportController@import_form')->name('import');
-Route::post('/import_csv', 'ImportController@import_csv')->name('import_csv');
-Route::post('/import_xlsx', 'ImportController@import_xlsx')->name('import_xlsx');
+Route::post('/import_file', 'ImportController@import_file')->name('import_file');
