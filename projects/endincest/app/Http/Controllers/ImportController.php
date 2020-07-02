@@ -18,7 +18,7 @@ class ImportController extends Controller {
 
 	}
 
-	//Method to import csv file
+	//Method to import csv or xlsx file
 
 	public function import_file(Request $request) {
 
