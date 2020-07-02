@@ -15,6 +15,7 @@
 
                             </h2><p>CLick to scan QR</p>
                     </div>
+
                     <div class="col-5">
                         <div class="whatsapp-form-div ">
 
