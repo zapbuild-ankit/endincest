@@ -49,8 +49,7 @@ class WhatsappController extends Controller {
 		if (is_array($data)) {$data = json_encode($data);}
 		$options                    = stream_context_create(['http' => [
 					'method'                                                 => 'POST',
-					'header'                                                 => 'Content-type: application/json',
-					'content'                                                => $data]]);
+					'header'                                                 => 'Content-type: application/json', 'content'                                                 => $data]]);
 		$response = file_get_contents($url, false, $options);
 
 		file_put_contents('requests.log', $response.PHP_EOL, FILE_APPEND);
