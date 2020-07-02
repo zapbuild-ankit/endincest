@@ -12,7 +12,13 @@ Message notification
 sudo apt-get install php7.2-curl
 
 4. paypal payment 
+
 composer require srmklive/paypal
+
+5.Import data(for phpspreadsheet library)
+
+composer require phpoffice/phpspreadsheet
+
  
 
 
