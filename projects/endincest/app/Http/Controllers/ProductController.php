@@ -115,6 +115,16 @@ class ProductController extends Controller {
 	public function destroy($id) {
 		$product = Product::findOrFail($id);
 
+		$carts = Cart::where('product_id', $id)->get();
+		foreach ($carts as $cart) {
+			$cart->delete();
+		}
+
+		$wishlists = Wishlist::where('product_id', $id)->get();
+		foreach ($wishlists as $wishlist) {
+			$wishlist->delete();
+		}
+
 		$product->delete();
 
 		return redirect('/products')->with('success', 'Product is successfully deleted');
@@ -167,7 +177,7 @@ class ProductController extends Controller {
 
 			$quantity[] = $cart->quantity;
 
-			$products[] = Product::findOrFail($product_id);
+			$products[] = Product::find($product_id);
 
 		}
 
