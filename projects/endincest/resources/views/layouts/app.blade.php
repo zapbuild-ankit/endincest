@@ -29,6 +29,8 @@
 
    <script src="{{asset('plugins/jquery-validation/jquery.validate.js')}}"></script>
 
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=301891977876068&autoLogAppEvents=1" nonce="qXvuX05J"></script>
+
 
 
 
@@ -54,6 +56,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+
+                         <li class="nav-item">
+                       <a href="{{route('cart')}}" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart</a>
+                     </li>
+                        <li class="nav-item">
+                          <a href="{{route('wishlist')}}" class="nav-link"><i class="fa fa-heart"></i>Wishlist</a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('productview')}}" class="nav-link"><i class=""></i>Products</a>
+                      </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -159,5 +171,80 @@
 
         </script>
         <script src="{{asset('js/app.js')}}"></script>
+
+       <script>
+
+  function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+      testAPI();
+     // window.location.replace('http://localhost:8000/feeds.blade.php');
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this webpage.';
+    }
+  }
+
+
+  function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function(response) {   // See the onlogin handler
+      statusChangeCallback(response);
+    });
+  }
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '301891977876068',
+      cookie     : true,                     // Enable cookies to allow the server to access the session.
+      xfbml      : true,                     // Parse social plugins on this webpage.
+      version    : 'v7.0'           // Use this Graph API version for this call.
+    });
+
+
+    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+      statusChangeCallback(response);        // Returns the login status.
+    });
+  };
+
+
+  (function(d, s, id) {                      // Load the SDK asynchronously
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+ js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+
+    FB.api(
+  '/105339511224506/feed?fields=id,story,attachments{media}&limit=25',
+  'GET',
+
+  function(response) {
+      console.log(response);
+  }
+);
+     document.getElementById('fb').innerHTML =
+        '' + response + '!';
+  }
+
+</script>
+
+
+<div id="status">
+</div>
+<div id ="fb">
+    </div>
 </body>
 </html>
