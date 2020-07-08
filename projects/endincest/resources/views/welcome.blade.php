@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <style>
+
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -62,9 +63,16 @@
                 margin-bottom: 30px;
             }
         </style>
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+        <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+
+
+
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -76,8 +84,12 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
+                    <a href="{{route('productview')}}"><i class=""></i>Products</a>
+                       <a href="{{route('cart')}}"><i class="fa     fa-shopping-cart"></i>Cart</a>
+                          <a href="{{route('wishlist')}}"><i class="fa fa-heart"></i>Wishlist</a>
                 </div>
             @endif
+
 
             <div class="content">
                 <div class="title m-b-md">
@@ -89,4 +101,6 @@
             </div>
         </div>
     </body>
+    <!-- Bootstrap 4 -->
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </html>
