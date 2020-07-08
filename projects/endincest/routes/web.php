@@ -84,3 +84,23 @@ Route::get('/welcome', 'WhatsappController@welcome')->name('welcome');
 
 Route::get('/import', 'ImportController@import_form')->name('import');
 Route::post('/import_file', 'ImportController@import_file')->name('import_file');
+
+//paytm section
+Route::get('eventRegistration', 'OrderController@register')->name('event_registration');
+Route::post('paytmPayment', 'OrderController@order')->name('paytm');
+Route::post('payment/status', 'OrderController@paymentCallback')->name('status');
+
+//Product section
+Route::resource('products', 'ProductController');
+Route::get('cart', 'ProductController@cartview')->name('cart');
+Route::get('wishlist', 'ProductController@wishlistview')->name('wishlist');
+Route::get('productview', 'ProductController@productview')->name('productview');
+Route::group(['middleware' => 'auth'], function () {
+		Route::post('/addtocart/{id}', 'ProductController@addtocart')->name('addtocart');
+		Route::post('/addtowishlist/{id}', 'ProductController@addtowishlist')->name('addtowishlist');
+		Route::post('/removecart/{id}', 'ProductController@removecart')->name('removecart');
+		Route::post('/removewish/{id}', 'ProductController@removewish')->name('removewish');
+		Route::get('cart', 'ProductController@cartview')->name('cart');
+		Route::get('wishlist', 'ProductController@wishlistview')->name('wishlist');
+
+	});
