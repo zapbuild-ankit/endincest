@@ -240,11 +240,5 @@
   }
 
 </script>
-
-
-<div id="status">
-</div>
-<div id ="fb">
-    </div>
 </body>
 </html>

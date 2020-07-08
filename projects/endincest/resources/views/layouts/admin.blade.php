@@ -319,6 +319,17 @@
 
           </li>
 
+           <li class="nav-item">
+            <a href="{{route('products.index')}}" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                Products
+
+              </p>
+            </a>
+
+          </li>
+
             <li class="nav-item">
             <a href="{{route('cropimage')}}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
@@ -357,6 +368,15 @@
               <i class="nav-icon fab fa-paypal"></i>
               <p>
                   Paypal Payment
+
+              </p>
+            </a>
+
+            <li class="nav-item">
+            <a href="{{route('event_registration')}}" class="nav-link">
+              <i class="nav-icon fab fa-paytm"></i>
+              <p>
+                  Paytm Payment
 
               </p>
             </a>
@@ -601,18 +621,82 @@
 
         });
 
+         //product validation
+        $("#product_form").validate({
+            rules: {
+
+                name: {
+                    required: true,
+
+
+
+                },
+
+                category: {
+                    required: true,
+
+
+                },
+
+                price: {
+                    required: true,
+
+
+                },
+
+
+                image: {
+                    required: true,
+
+
+                },
+
+
+                description: {
+                    required: true,
+
+
+                },
+
+            },
+            messages:{
+
+                name: {
+                    required: "Please enter name",
+
+
+                },
+                category: {
+                    required: "Please enter category",
+
+                },
+                price: {
+                    required: "Please enter price",
+
+                },
+
+                image: {
+                    required: "Please enter image",
+
+                },
+
+                description: {
+                    required: "Please enter description",
+
+                },
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
 
 
 
         </script>
 
-<script src="https://apps.elfsight.com/p/platform.js" defer></script>
-<!--Whatsapp chat widget-->
 
-<div class="elfsight-app-46172e8b-7803-4449-b666-3e963e2c519a"></div>
-
-<!--Messenger chat widget-->
-
-<div class="elfsight-app-fe280e5d-fdaa-43ad-81a2-30d8668c1dca"></div>
 
 </html>
