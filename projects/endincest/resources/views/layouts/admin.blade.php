@@ -690,6 +690,71 @@
                 submitHandler: function(form) {
                     form.submit();
                 }
+
+
+        });
+
+         //product validation
+        $("#product_form_edit").validate({
+            rules: {
+
+                name: {
+                    required: true,
+
+
+
+                },
+
+                category: {
+                    required: true,
+
+
+                },
+
+                price: {
+                    required: true,
+
+
+                },
+
+
+                description: {
+                    required: true,
+
+
+                },
+
+            },
+            messages:{
+
+                name: {
+                    required: "Please enter name",
+
+
+                },
+                category: {
+                    required: "Please enter category",
+
+                },
+                price: {
+                    required: "Please enter price",
+
+                },
+
+
+
+                description: {
+                    required: "Please enter description",
+
+                },
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+
+
         });
 
 
