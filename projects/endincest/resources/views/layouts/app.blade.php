@@ -58,10 +58,11 @@
                         <!-- Authentication Links -->
 
                          <li class="nav-item">
-                       <a href="{{route('cart')}}" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart</a>
+                       <a href="{{route('cart')}}" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart @isset($count)<span class="badge  badge-pill badge-danger count" style="border-radius:10px;">
+                       {{$count}}@endisset</a>
                      </li>
                         <li class="nav-item">
-                          <a href="{{route('wishlist')}}" class="nav-link"><i class="fa fa-heart"></i>Wishlist</a>
+                          <a href="{{route('wishlist')}}" class="nav-link"><i class="fa fa-heart"></i>Wishlist @isset($number)<span class="badge  badge-pill badge-danger count" style="border-radius:10px;">{{$number}}@endisset</a>
                         </li>
                         <li class="nav-item">
                         <a href="{{route('productview')}}" class="nav-link"><i class=""></i>Products</a>
