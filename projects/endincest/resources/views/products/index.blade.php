@@ -27,7 +27,6 @@
                          <th>Name</th>
                        <th>category</th>
                         <th>Price</th>
-                     <th>Sold</th>
                        <th>Image</th>
                        <th>Description</th>
                       <th>Actions</th>
@@ -41,7 +40,7 @@
              <td>{!! $product->name !!}</td>
              <td> {{$product->category}} </td>
               <td> {{$product->price}} </td>
-              <td> {{$product->sold}} </td>
+
               <td><img src="{{ asset('/dist/img/products/' . $product->image)}}" style='width:50px;float: left;' class="img-circle elevation-2" alt="product Image"></td>
               <td> {{$product->description}} </td>
 
@@ -54,7 +53,7 @@
                                      @method('DELETE')
                                         @csrf
 
-                                            <button type='submit'  name='submit' class='btn btn-sm btn-danger'><i class="fa fa-trash"></i></button>
+                                            <button type='submit'  name='submit' class='btn btn-sm btn-danger' onclick="return confirm('Are you sure, Want to Delete?')"><i class="fa fa-trash"></i></button>
 
                                       </form>
 

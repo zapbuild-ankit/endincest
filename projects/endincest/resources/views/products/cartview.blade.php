@@ -26,6 +26,7 @@
 <i class='fa fa-cart-plus' style="margin-left:20px;">:-
         {{$quantity[$endpoint]}}</i>
 <?php $endpoint++?>
+<i class="glyphicon glyphicon-plus-sign"></i>
 <br><br>
        <div class="button">
        <form method="" action="#">
@@ -33,9 +34,9 @@
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
 
-     <form method="post" action="{{route('removecart',$product->id)}}">
+     <form  method="post" action="{{route('removecart',$product->id)}}">
       @csrf
-       <button type="submit" class="btn btn-sm btn-danger button"><i class="fa fa-trash"></i></button>
+       <button type="submit" class="btn btn-sm btn-danger button" onclick="return confirm('Are you sure, Want to Delete?')"><i class="fa fa-trash"></i></button>
      </form>
      <style type="text/css" media="screen">
       .button form{
@@ -57,7 +58,7 @@
 </div>
 </div>
 @endif
-@if (empty($products))
+@if(empty($products))
 	<h2 align="center">No Product added to cart</h2>
 @endif
 @endsection

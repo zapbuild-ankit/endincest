@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title') Products @endsection
 @section('content')
-@if(!empty($products))
+@if(!$products->isEmpty())
 <h3 class='text-center' style='margin-bottom: 40px' ><b>PRODUCTS</b></h3>
 <div class='container-fluid'>
         <div class='row'>
@@ -20,13 +20,37 @@
         <h4 class="card-title">{{$product->name}}</h4>
        <p>{{$product->description}}</p>
        <i class='fa fa-rupee'>{{$product->price}}</i><br><br>
+       @if($user)
+       @if(!$carts->isEmpty())
+        @foreach($carts as $cart)
 
-       <form method="post" action="{{route('addtocart',$product->id)}}">
+       @if($product->id==$cart->product_id)
+
+<span class="badge badge-success">Already added to cart</span>
+       @endif
+@endforeach
+       @if($product->status == 1)
+<form method="post" action="{{route('addtocart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
 
+       @endif
 
+     @endif
+     @if($carts->isEmpty())
+     <form method="post" action="{{route('addtocart',$product->id)}}">
+        @csrf
+       <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
+     </form>
+     @endif
+     @endif
+     @if(!$user)
+       <form method="post" action="{{route('addtocart',$product->id)}}">
+        @csrf
+       <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
+     </form>
+     @endif
 
 </div>
         </div>
@@ -36,7 +60,7 @@
 </div>
 </div>
 @endif
-@if (empty($products))
+@if($products->isEmpty())
 <h2 class="text-center">No Products Available</h2>
 @endif
 @endsection
