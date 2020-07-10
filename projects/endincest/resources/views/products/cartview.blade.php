@@ -26,7 +26,6 @@
 <i class='fa fa-cart-plus' style="margin-left:20px;">:-
         {{$quantity[$endpoint]}}</i>
 <?php $endpoint++?>
-<i class="glyphicon glyphicon-plus-sign"></i>
 <br><br>
        <div class="button">
        <form method="" action="#">
