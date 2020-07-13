@@ -53,10 +53,22 @@
 
                     </ul>
 
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
 
+                                           <!-- SEARCH FORM -->
+    <form class="form-inline ml-3"  action="{{ route('search') }}" method="GET" style="margin-right:10px;">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search"name="query" id="query" value="{{ request()->input('query') }}" placeholder="Search for product" aria-label="Search" required>
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
                          <li class="nav-item">
                        <a href="{{route('cart')}}" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart @isset($count)<span class="badge  badge-pill badge-danger count" style="border-radius:10px;">
                        {{$count}}@endisset</a>
