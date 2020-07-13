@@ -19,6 +19,24 @@ composer require srmklive/paypal
 
 composer require phpoffice/phpspreadsheet
 
+6.paytm payment integration
+
+composer require anandsiddharth/laravel-paytm-wallet
+
+7. Paypal login details
+  Email:-ankitkumar.zapbuild@gmail.com
+  password:-Akj@9939
+  
+  Add new one:-
+  test credit card :-Card Type: MasterCard
+
+Card Number: 5241786562940108
+
+Expiration Date: 01/2021
+
+CVV: 158
+
+
  
 
 
