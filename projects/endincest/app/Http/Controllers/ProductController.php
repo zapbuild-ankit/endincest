@@ -392,6 +392,7 @@ class ProductController extends Controller {
 
 		$productlist = Product::all();
 		if (!$productlist->isEmpty()) {
+
 			$productcount = $productlist->count();
 
 			$products = Product::where('name', 'like', "%$query%")
