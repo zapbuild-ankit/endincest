@@ -3,7 +3,19 @@
 @section('content')
 @if(!empty($products))
 <h3 class='text-center' style='margin-bottom: 40px' ><b>YOUR WISHLIST</b></h3>
+
 <div class='container-fluid'>
+  @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+             @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
         <div class='row'>
 @foreach ($products as $product)
 <div class='col-lg-3 col-lg-3 col-6'>
@@ -15,8 +27,8 @@
        <p>{{$product->description}}</p>
        <i class='fa fa-rupee'>{{$product->price}}</i><br><br>
         <div class="button">
-       <form method="" action="#">
-
+       <form method="post" action="{{route('paypal_payment',$product->id)}}">
+       @csrf
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
 
@@ -36,6 +48,7 @@
 
 </div>
         </div>
+        <hr>
         </div>
 
 @endforeach

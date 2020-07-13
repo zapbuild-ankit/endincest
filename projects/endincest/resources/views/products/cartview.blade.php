@@ -5,6 +5,17 @@
 <h3 class='text-center' style='margin-bottom: 40px' ><b>MY CART</b></h3>
 <div class='container-fluid'>
   <h2 class="text-center">Products in Your Cart</h2>
+       @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+             @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
         <div class='row'>
 <?php $endpoint = 0?>
 @foreach ($products as $product)
@@ -28,8 +39,8 @@
 <?php $endpoint++?>
 <br><br>
        <div class="button">
-       <form method="" action="#">
-
+       <form method="post" action="{{route('paypal_payment',$product->id)}}">
+        @csrf
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
 
@@ -49,6 +60,7 @@
 </div>
 
         </div>
+        <hr>
         </div>
 
 @endforeach

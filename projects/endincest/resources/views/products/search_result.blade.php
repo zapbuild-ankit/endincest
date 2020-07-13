@@ -1,13 +1,35 @@
 @extends('layouts.app')
-@section('title') Products @endsection
-@section('content')
-@if(!$products->isEmpty())
-<h3 class='text-center' style='margin-bottom: 40px' ><b>PRODUCTS</b></h3>
-<div class='container-fluid' >
-  @csrf
-        <div class='row' id='products'>
-@foreach ($products as $product)
 
+@section('title', 'Search Results')
+
+
+@section('content')
+
+    <div class="container">
+        @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
+
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+
+  @isset($products)
+    @if(!$products->isEmpty())
+<h3 class='text-center' style='margin-bottom: 40px' ><b>PRODUCTS</b></h3>
+        <p class="search-results-count text-center">Showing {{ $products->total() }} results for "{{ request()->input('query') }}"</p>
+<div class='container-fluid'>
+        <div class='row'>
+@foreach ($products as $product)
 <div class='col-lg-3 col-lg-3 col-12'>
         <div class="card" style="width:200px">
 
@@ -31,7 +53,8 @@
 <span class="badge badge-success">Already added to cart</span>
        @endif
 @endforeach
-@foreach($questions as $question)
+
+ @foreach($questions as $question)
        @if($question->id == $product->id)
 <form method="post" action="{{route('addtocart',$product->id)}}">
         @csrf
@@ -40,6 +63,7 @@
 
        @endif
 @endforeach
+
      @endif
      @if($carts->isEmpty())
      <form method="post" action="{{route('addtocart',$product->id)}}">
@@ -53,7 +77,6 @@
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
-
      @endif
 
 </div>
@@ -62,37 +85,15 @@
         </div>
 
 @endforeach
-
 </div>
 </div>
 
-@if($Allproducts_count>6)
-<button class="btn btn-lg btn-success see-more " id="load-btn"  data-page="2" data-link="http://localhost:8000/productview?page=" data-div="#products" data-all=<?=$Allproducts_count?>>Load more</button>
 @endif
-@endif
+
 @if($products->isEmpty())
-<h2 class="text-center">No Products Available</h2>
+<h2 class="text-center">Searched Product not Available</h2>
 @endif
-<script>
-  $(".see-more").click(function() {
-  $div = $($(this).attr('data-div')); //div to append
-  $link = $(this).attr('data-link'); //current URL
-  $product_count = $(this).attr('data-all'); //total product count
+@endisset
 
-  $page = $(this).attr('data-page'); //get the next page #
 
-  $href = $link + $page; //complete URL
-  $.get($href, function(response) { //append data
-
-    $html = $(response).find("#products").html();
-    $div.append($html);
-  });
-
-  $(this).attr('data-page', (parseInt($page) + 1)); //update page #
-if($product_count<=6*$page)
-{
-$('#load-btn').remove();
-}
-});
-</script>
-@endsection
+    @endsection
