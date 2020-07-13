@@ -93,6 +93,7 @@ Route::post('payment/status', 'OrderController@paymentCallback');
 //Product section
 Route::resource('products', 'ProductController');
 Route::get('productview', 'ProductController@productview')->name('productview');
+Route::get('search', 'ProductController@search')->name('search');
 Route::group(['middleware' => 'auth'], function () {
 		Route::post('/addtocart/{id}', 'ProductController@addtocart')->name('addtocart');
 		Route::post('/addtowishlist/{id}', 'ProductController@addtowishlist')->name('addtowishlist');
@@ -100,5 +101,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/removewish/{id}', 'ProductController@removewish')->name('removewish');
 		Route::get('cart', 'ProductController@cartview')->name('cart');
 		Route::get('wishlist', 'ProductController@wishlistview')->name('wishlist');
+		Route::post('/paypal_payment/{id}', 'ProductController@paypal_payment')->name('paypal_payment');
+		Route::get('cancel', 'ProductController@cancel')->name('payment.cancel');
+		Route::get('payment/success', 'ProductController@success')->name('payment.success');
 
 	});
