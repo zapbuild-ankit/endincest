@@ -84,9 +84,9 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
-                    <a href="{{route('productview')}}"><i class=""></i>Products</a>
+                    <a href="{{route('product_view')}}"><i class=""></i>Products</a>
                        <a href="{{route('cart')}}"><i class="fa     fa-shopping-cart"></i>Cart</a>
-                          <a href="{{route('wishlist')}}"><i class="fa fa-heart"></i>Wishlist</a>
+                          <a href="{{route('wish_list')}}"><i class="fa fa-heart"></i>Wishlist</a>
                 </div>
             @endif
 
