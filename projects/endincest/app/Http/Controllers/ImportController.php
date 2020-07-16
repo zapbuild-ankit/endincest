@@ -10,6 +10,10 @@ use Validator;
 
 class ImportController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	// Method to show the form to select data for import
 
 	public function import_form() {
