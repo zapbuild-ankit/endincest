@@ -35,7 +35,7 @@
 
 <img src="{{ asset('/dist/img/products/' . $product->image)}}" style='height:100px;float: left;' class="img-circle elevation-2" alt="product Image">
 
-<form method="post" action="{{route('addtowishlist',$product->id)}}">
+<form method="post" action="{{route('add_to_wish_list',$product->id)}}">
   @csrf
 <button type="submit" class="btn"  style="margin-left:15px; font-size:10px;"><i class="fa fa-heart-o"></i></button>
 </form>
@@ -56,7 +56,7 @@
 
  @foreach($questions as $question)
        @if($question->id == $product->id)
-<form method="post" action="{{route('addtocart',$product->id)}}">
+<form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
@@ -66,14 +66,14 @@
 
      @endif
      @if($carts->isEmpty())
-     <form method="post" action="{{route('addtocart',$product->id)}}">
+     <form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
      @endif
      @endif
      @if(!$user)
-       <form method="post" action="{{route('addtocart',$product->id)}}">
+       <form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>

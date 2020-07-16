@@ -24,7 +24,7 @@
         <div class="card" style="width:250px">
 <img src="{{ asset('/dist/img/products/' . $product->image)}}" style='height:100px;float: left;' class="img-circle elevation-2" alt="product Image">
 
-<form method="post" action="{{route('addtowishlist',$product->id)}}">
+<form method="post" action="{{route('add_to_wish_list',$product->id)}}">
   @csrf
 <button type="submit" class="btn"  style="margin-left:15px; font-size:10px;"><i class="fa fa-heart-o"></i></button>
 </form>
@@ -44,7 +44,7 @@
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
 
-     <form  method="post" action="{{route('removecart',$product->id)}}">
+     <form  method="post" action="{{route('remove_cart',$product->id)}}">
       @csrf
        <button type="submit" class="btn btn-sm btn-danger button" onclick="return confirm('Are you sure, Want to Delete?')"><i class="fa fa-trash"></i></button>
      </form>

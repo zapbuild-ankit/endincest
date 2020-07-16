@@ -13,7 +13,7 @@
 
 <img src="{{ asset('/dist/img/products/' . $product->image)}}" style='height:100px;float: left;' class="img-circle elevation-2" alt="product Image">
 
-<form method="post" action="{{route('addtowishlist',$product->id)}}">
+<form method="post" action="{{route('add_to_wish_list',$product->id)}}">
   @csrf
 <button type="submit" class="btn"  style="margin-left:15px; font-size:10px;"><i class="fa fa-heart-o"></i></button>
 </form>
@@ -33,7 +33,7 @@
 @endforeach
 @foreach($questions as $question)
        @if($question->id == $product->id)
-<form method="post" action="{{route('addtocart',$product->id)}}">
+<form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
@@ -42,14 +42,14 @@
 @endforeach
      @endif
      @if($carts->isEmpty())
-     <form method="post" action="{{route('addtocart',$product->id)}}">
+     <form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
      @endif
      @endif
      @if(!$user)
-       <form method="post" action="{{route('addtocart',$product->id)}}">
+       <form method="post" action="{{route('add_to_cart',$product->id)}}">
         @csrf
        <button type="submit" style="margin-left:15px;" class="btn btn-sm btn-success"><i class="fa fa-cart-plus"></i>Add To Cart</button>
      </form>
@@ -67,7 +67,7 @@
 </div>
 
 @if($Allproducts_count>6)
-<button class="btn btn-lg btn-success see-more " id="load-btn"  data-page="2" data-link="http://localhost:8000/productview?page=" data-div="#products" data-all=<?=$Allproducts_count?>>Load more</button>
+<button class="btn btn-lg btn-success see-more " id="load-btn"  data-page="2" data-link="http://localhost:8000/product_view?page=" data-div="#products" data-all=<?=$Allproducts_count?>>Load more</button>
 @endif
 @endif
 @if($products->isEmpty())

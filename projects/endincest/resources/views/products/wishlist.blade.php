@@ -32,7 +32,7 @@
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
 
-     <form method="post" action="{{route('removewish',$product->id)}}">
+     <form method="post" action="{{route('remove_wish',$product->id)}}">
       @csrf
        <button type="submit" class="btn btn-sm btn-danger button" onclick="return confirm('Are You sure, Want to Delete?')"><i class="fa fa-trash"></i></button>
      </form>
