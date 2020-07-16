@@ -11,17 +11,23 @@ use Image;
 class AdminController extends Controller {
 
 	public function __construct() {
-		$this->middleware('auth');
+		$this->middleware('auth:admin');
 	}
+
+	//Method to show admin dash
 
 	public function admindash() {
 		return view('admin.admindash');
 
 	}
 
+	//Method to show event form
+
 	public function eventform() {
 		return view('admin.eventform');
 	}
+
+	//Method to add event
 
 	public function addevent(Request $request) {
 		if ($request->hasFile('image')) {
@@ -55,6 +61,8 @@ class AdminController extends Controller {
 		return redirect('/eventschedule')->with('success', 'Event is successfully saved');
 	}
 
+	//Method to show event schedule
+
 	public function eventschedule() {
 
 		$events = DB::table('events')->paginate(15);
@@ -62,6 +70,8 @@ class AdminController extends Controller {
 		return view('admin.eventlist', compact('events'))
 			->with('i', (request()->input('page', 1)-1)*5);
 	}
+
+	//Method to destroy event
 
 	public function destroy($id) {
 
@@ -72,10 +82,14 @@ class AdminController extends Controller {
 		return redirect('/eventschedule')->with('success', 'Event is successfully deleted');
 	}
 
+	//Method to edit event form
+
 	public function editeventform($id) {
 		$event = Event::findOrFail($id);
 		return view('admin.editeventform', compact('event'));
 	}
+
+	//Method to update event
 
 	public function updateevent(Request $request, $id) {
 		$event = Event::findOrFail($id);
