@@ -65,6 +65,8 @@
 
 
 </head>
+ @guest('admin')
+                        @else
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -396,14 +398,14 @@
 
           <li class="nav-header">ACTION</li>
           <li class="nav-item">
-             <a class="nav-link" href="{{ route('logout') }}"
+             <a class="nav-link" href="{{ route('admin.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                       <i class="nav-icon far fa-circle text-danger"></i>
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
 
@@ -415,7 +417,7 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
+@endguest
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -756,6 +758,40 @@
 
 
         });
+
+        // Admin Login Validation
+        $("#admin_login").validate({
+            rules: {
+
+                email: {
+                    required: true,
+                    email:true
+
+                },
+                password:{
+                    required:true,
+                    noSpace:true,
+                },
+            },
+            messages:{
+
+                email: {
+                    required: "Please enter Email",
+                    email:"Please fill correct email."
+                },
+                password: {
+                    required:"Please enter password.",
+
+
+                },
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
+
 
 
 

@@ -74,10 +74,10 @@
                        {{$count}}@endisset</a>
                      </li>
                         <li class="nav-item">
-                          <a href="{{route('wishlist')}}" class="nav-link"><i class="fa fa-heart"></i>Wishlist @isset($number)<span class="badge  badge-pill badge-danger count" style="border-radius:10px;">{{$number}}@endisset</a>
+                          <a href="{{route('wish_list')}}" class="nav-link"><i class="fa fa-heart"></i>Wishlist @isset($number)<span class="badge  badge-pill badge-danger count" style="border-radius:10px;">{{$number}}@endisset</a>
                         </li>
                         <li class="nav-item">
-                        <a href="{{route('productview')}}" class="nav-link"><i class=""></i>Products</a>
+                        <a href="{{route('product_view')}}" class="nav-link"><i class=""></i>Products</a>
                       </li>
                         @guest
                             <li class="nav-item">
