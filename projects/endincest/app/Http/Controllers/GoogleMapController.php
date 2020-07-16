@@ -7,6 +7,10 @@ use Validator;
 
 class GoogleMapController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	//Method to show the Google map with select options of location
 
 	function create_map() {
