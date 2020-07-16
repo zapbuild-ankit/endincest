@@ -47,7 +47,7 @@
               <td> {{$event->status}} </td>
               <td>
 
-              		<a class='btn btn-sm btn-success' href="{{route('editevent',$event->id)}}"><i class="fas fa-pen-square"></i></a><span>
+              		<a class='btn btn-sm btn-success' href="{{route('editevent',$event->id)}}"><i class="fas fa-pen-square"></i></a>
 
               		<form class='form-group pull-right'  action="{{route('destroyevent',$event->id)}}" method="POST">
 
