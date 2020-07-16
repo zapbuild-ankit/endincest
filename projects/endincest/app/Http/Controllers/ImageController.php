@@ -7,6 +7,10 @@ use Validator;
 
 class ImageController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	// Method for image select with crop option
 
 	public function index() {
