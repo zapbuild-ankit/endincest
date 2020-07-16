@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\SocialAccount;
 use App\User;
 use Auth;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Socialite;
@@ -24,15 +25,7 @@ class LoginController extends Controller {
 
 	use AuthenticatesUsers;
 
-	// redirecting users according to roles
-
-	public function redirectTo() {
-		if (Auth::user()->hasAnyRole('admin')) {
-			return '/admin/admindash';
-		} else if (Auth::user()->hasAnyRole('user')) {
-			return '/user/userdash';
-		}
-	}
+	protected $redirectTo = '/home';
 
 	public function __construct() {
 		$this->middleware('guest')->except('logout');
@@ -46,11 +39,13 @@ class LoginController extends Controller {
 	//Method for handling facebook callback
 
 	public function handleFacebookCallback() {
+
 		$provider = Socialite::driver('facebook')->user();
 
 		$account = SocialAccount::where('provider', 'facebook')->where('provider_user_id', $provider->getId())->first();
 
 		if ($account) {
+
 			$user = $account->user;
 
 		} else {
@@ -75,7 +70,7 @@ class LoginController extends Controller {
 		}
 
 		auth()->login($user);
-		return redirect('/home');
+		return redirect('/home')->with('user', $user);
 
 	}
 
@@ -112,6 +107,7 @@ class LoginController extends Controller {
 						'name'     => $provider->name,
 						'email'    => $provider->email,
 						'password' => md5(rand(1, 10000)),
+
 					]);
 			}
 
