@@ -16,12 +16,14 @@ class RedirectIfAuthenticated {
 	 */
 	public function handle($request, Closure $next, $guard = null) {
 		if (Auth::guard($guard)->check()) {
-			if (Auth::user()->hasAnyRole('admin')) {
-				return redirect('/admin/admindash');
-			}
 
-			if (Auth::user()->hasAnyRole('user')) {
-				return redirect('/user/userdash');
+			if ($guard == "admin") {
+				//user was authenticated with admin guard.
+				return redirect()->route('admin.admindash');
+			} else {
+
+				//default guard.
+				return redirect()->route('home');
 			}
 
 		}
