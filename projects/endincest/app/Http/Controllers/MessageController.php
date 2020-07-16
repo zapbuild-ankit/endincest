@@ -8,6 +8,10 @@ use Twilio\Rest\Client;
 
 class MessageController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	// Show the forms with users phone number details.
 
 	public function show() {
