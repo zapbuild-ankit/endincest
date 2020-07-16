@@ -13,21 +13,31 @@ use Image;
 
 class ProfileController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	protected $validationRules = [
 		'current-password' => 'required',
 		'new-password'     => 'required',
 	];
+
+	//Method to show profile
 
 	public function index() {
 
 		return view('profile.profile');
 	}
 
+	//Method to edit profile
+
 	public function editprofile() {
 		$user = auth::user();
 
 		return view('profile.editprofile', compact('user'));
 	}
+
+	//Method to update profile
 
 	public function updateprofile(Request $request) {
 		$user = Auth::user();
@@ -51,6 +61,8 @@ class ProfileController extends Controller {
 
 	}
 
+	//Method to add image
+
 	public function addimage(Request $request) {
 
 		if ($request->hasFile('profile_pic')) {
@@ -69,15 +81,19 @@ class ProfileController extends Controller {
 		return redirect('\profile');
 
 	}
+	//Method to view image
 
 	public function viewimage() {
 		return view('profile.viewimage');
 	}
+	//Method to show change password form
 
 	public function showChangePasswordForm() {
 
 		return view('auth.passwords.changepassword');
 	}
+
+	//Method for changing password
 
 	public function changePassword(Request $request) {
 
