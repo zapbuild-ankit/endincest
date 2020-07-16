@@ -6,6 +6,10 @@ use Validator;
 
 class WhatsappController extends Controller {
 
+	public function __construct() {
+		$this->middleware('auth:admin');
+	}
+
 	//Method to show the Form for sending message
 
 	public function index() {
