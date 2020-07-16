@@ -8,147 +8,21 @@ use App\User;
 use App\Wishlist;
 use Auth;
 use Illuminate\Http\Request;
-use Image;
+
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class ProductController extends Controller {
 
 	protected $provider;
 	public function __construct() {
+
 		$this->provider = new ExpressCheckout();
-
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index() {
-		$products = Product::all();
-		return view('products.index', compact('products'));
-
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create() {
-		return view('products.create');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request) {
-
-		$validatedData = $request->validate([
-				'name'        => 'required',
-				'description' => 'required',
-				'category'    => 'required',
-				'price'       => 'required',
-				'image'       => 'required',
-
-			]);
-
-		if ($request->hasFile('image')) {
-
-			$file     = $request->file('image');
-			$filename = time().'.'.$file->getClientOriginalExtension();
-			Image::make($file)->resize(300, 300)->save(public_path('/dist/img/products/'.$filename));
-
-		}
-
-		$product = new Product;
-
-		$product->name        = $request->name;
-		$product->description = $request->description;
-		$product->category    = $request->category;
-		$product->price       = $request->price;
-		$product->image       = $filename;
-		$product->save();
-
-		return redirect('/products')->with('success', 'Product is successfully saved');
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\product  $product
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id) {
-		$product = Product::findOrFail($id);
-
-		return view('products.edit')->with('product', $product);
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\product  $product
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id) {
-		$product = Product::findOrFail($id);
-
-		if ($product->image == "") {
-			$this->validate($request, ['image' => 'required']);
-		}
-
-		$this->validate($request, ['name' => 'required', 'description' => 'required', 'category' => 'required', 'price' => 'required']);
-		if ($request->hasFile('image')) {
-
-			$file     = $request->file('image');
-			$filename = time().'.'.$file->getClientOriginalExtension();
-
-			Image::make($file)->resize(300, 300)->save(public_path('/dist/img/products/'.$filename));
-			$product->image = $filename;
-			$product->save();
-
-		}
-
-		$input = $request->only('name', 'description', 'category', 'price');
-
-		$product->update($input);
-		return redirect('/products')->with('success', 'Product is successfully edited');
-		;
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\product  $product
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id) {
-		$product = Product::findOrFail($id);
-
-		$carts = Cart::where('product_id', $id)->get();
-		foreach ($carts as $cart) {
-			$cart->delete();
-		}
-
-		$wishlists = Wishlist::where('product_id', $id)->get();
-		foreach ($wishlists as $wishlist) {
-			$wishlist->delete();
-		}
-
-		$product->delete();
-
-		return redirect('/products')->with('success', 'Product is successfully deleted');
 
 	}
 
 	//Method to show the products to users
 
-	public function productview() {
+	public function product_view() {
 
 		$user = Auth::User();
 
@@ -161,10 +35,9 @@ class ProductController extends Controller {
 			if (!$carts->isEmpty()) {
 
 				foreach ($carts as $cart) {
-					$product_id     = $cart->product_id;
-					$cart_product[] = Product::findOrFail($product_id);
-					$count          = $count+1;
-					$ids[]          = $product_id;
+					$product_id = $cart->product_id;
+					$count      = $count+1;
+					$ids[]      = $product_id;
 				}
 
 				$questions = Product::where(function ($q) use ($ids) {
@@ -192,12 +65,12 @@ class ProductController extends Controller {
 			$Allproducts_count = $Allproducts->count();
 		}
 
-		return view('products.productview', compact('products', 'user', 'carts', 'count', 'number', 'cart_product', 'Allproducts_count', 'questions'));
+		return view('products.productview', compact('products', 'user', 'carts', 'count', 'number', 'Allproducts_count', 'questions'));
 	}
 
 	//Method to add products to cart
 
-	public function addtocart($id) {
+	public function add_to_cart($id) {
 
 		$user_id  = Auth::user()->id;
 		$carts    = Cart::where('product_id', $id)->get();
@@ -224,7 +97,7 @@ class ProductController extends Controller {
 
 	//Method to view products of cart
 
-	public function cartview() {
+	public function cart_view() {
 		$user = Auth::User();
 
 		if ($user) {
@@ -234,13 +107,13 @@ class ProductController extends Controller {
 			$wishlists = Wishlist::where('user_id', $user_id)->get();
 			$number    = 0;
 			$count     = 0;
-			if (isset($wishlists)) {
+			if (!$wishlists->isEmpty()) {
 				foreach ($wishlists as $wishlist) {
 
 					$number = $number+1;
 				}
 			}
-			if (isset($carts)) {
+			if (!$carts->isEmpty()) {
 				foreach ($carts as $cart) {
 					$product_id = $cart->product_id;
 
@@ -261,7 +134,7 @@ class ProductController extends Controller {
 
 	//Method to add Products to Wishlist
 
-	public function addtowishlist($id) {
+	public function add_to_wish_list($id) {
 
 		$user_id   = Auth::user()->id;
 		$wishlists = Wishlist::where('product_id', $id)->get();
@@ -270,7 +143,7 @@ class ProductController extends Controller {
 
 			if ($id == $Wishlist->product_id && $user_id == $Wishlist->user_id) {
 
-				return redirect('/wishlist');
+				return redirect('/wish_list');
 			}
 		}
 
@@ -279,13 +152,13 @@ class ProductController extends Controller {
 		$wishlists->user_id    = $user_id;
 		$wishlists->product_id = $id;
 		$wishlists->save();
-		return redirect('/wishlist');
+		return redirect('/wish_list');
 
 	}
 
 	//Method to view Products of wishlist
 
-	public function wishlistview() {
+	public function wish_list_view() {
 		$user = Auth::User();
 
 		if ($user) {
@@ -296,13 +169,13 @@ class ProductController extends Controller {
 			$carts     = Cart::where('user_id', $user_id)->get();
 			$count     = 0;
 			$number    = 0;
-			if (isset($carts)) {
+			if (!$carts->isEmpty()) {
 				foreach ($carts as $cart) {
 					;
 					$count = $count+1;
 				}
 			}
-			if (isset($wishlists)) {
+			if (!$wishlists->isEmpty()) {
 				foreach ($wishlists as $wishlist) {
 					$product_id = $wishlist->product_id;
 					$products[] = Product::find($product_id);
@@ -319,7 +192,7 @@ class ProductController extends Controller {
 
 	//Method to destroy products from cart
 
-	public function removecart($id) {
+	public function remove_cart($id) {
 		$user_id = Auth::User()->id;
 		$carts   = Cart::select('*')->where([
 				['product_id', '=', $id], ['user_id', '=', $user_id]
@@ -337,7 +210,7 @@ class ProductController extends Controller {
 
 	//Method to destroy products from Wishlist
 
-	public function removewish($id) {
+	public function remove_wish($id) {
 		$user_id   = Auth::User()->id;
 		$wishlists = Wishlist::select('*')->where([
 				['product_id', '=', $id], ['user_id', '=', $user_id]
@@ -348,7 +221,7 @@ class ProductController extends Controller {
 			$wishlist->delete();
 		}
 
-		return redirect('/wishlist');
+		return redirect('/wish_list');
 	}
 
 	//Method to filter products
