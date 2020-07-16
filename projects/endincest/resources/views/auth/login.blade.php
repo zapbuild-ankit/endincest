@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -62,6 +63,10 @@
                                     <a href="{{route('googlelogin')}}" class="btn btn-primary "><i class="fa fa-google"></i></a>
 
                                     <a href="{{route('glogin')}}" class="btn btn-primary "><i class="fa fa-google-plus"></i></a>
+                                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+<div id="status">
+</div>
 
 
                                 @if (Route::has('password.request'))
