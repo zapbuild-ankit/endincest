@@ -9,6 +9,9 @@ class PaypalController extends Controller {
 
 	protected $provider;
 	public function __construct() {
+
+		$this->middleware('auth:admin');
+
 		$this->provider = new ExpressCheckout();
 
 	}
