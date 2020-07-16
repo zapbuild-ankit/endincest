@@ -11,12 +11,16 @@
 |
  */
 
-Route::get('/', function () {
-		return view('welcome');
-	});
+//Admin section ###
 
-Route::get('/home', function () {
-		return view('welcome');
+Route::namespace ("Admin")->prefix('admin')->group(function () {
+		Route::get('/', 'AdminController@admindash')->name('admin.admindash');
+		Route::namespace ('Auth')->group(function () {
+				Route::get('/login', 'LoginController@showLoginForm')->name('admin.login');
+				Route::post('/login', 'LoginController@login');
+				Route::post('logout', 'LoginController@logout')->name('admin.logout');
+
+			});
 	});
 
 Route::get('gmap', 'GoogleMapController@create_map')->name('gmap');
@@ -28,17 +32,12 @@ Route::post('upload', 'ImageController@upload')->name('upload');
 Route::get('export_csv', 'Admin\ExportController@export_csv')->name('export_csv');
 Route::get('ExportView', 'Admin\ExportController@ExportView')->name('ExportView');
 Route::get('export_pdf', 'Admin\ExportController@export_pdf')->name('export_pdf');
-Route::get('/admin/admindash', 'Admin\AdminController@admindash')->middleware(['auth', 'auth.admin'])->name('admin');
-Route::get('user/userdash', 'User\UserController@userdash')->name('user');
+
 Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
 Route::get('/editprofile', 'Profile\ProfileController@editprofile')->name('editprofile');
 Route::patch('/updateprofile', 'Profile\ProfileController@updateprofile')->name('updateprofile');
 Route::get('/viewimage', 'Profile\ProfileController@viewimage')->name('viewimage');
 Route::post('/addimage', 'Profile\ProfileController@addimage')->name('addimage');
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/changepassword', 'Profile\ProfileController@showChangePasswordForm');
 Route::post('/changepassword', 'Profile\ProfileController@changePassword')->name('changePassword');
 Route::get('/eventform', 'Admin\AdminController@eventform')->name('eventform');
@@ -48,20 +47,6 @@ Route::get('/eventschedule', 'Admin\AdminController@eventschedule')->name('event
 Route::delete('/destroyevent/{id}', 'Admin\AdminController@destroy')->name('destroyevent');
 Route::get('/editevent/{id}', 'Admin\AdminController@editeventform')->name('editevent');
 Route::patch('/updateevent/{id}', 'Admin\AdminController@updateevent')->name('updateevent');
-
-// Facebook socialite
-Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('fblogin');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
-//Route::get('login/facebook/callback', 'Auth\LoginController@redirectTo');
-
-//Google Login using socialite
-Route::get('auth/google', 'Auth\LoginController@redirectToGoogle')->name('googlelogin');
-Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
-
-//Google Login using google API Client
-Route::get('auth/google/callback', 'Auth\LoginController@googlelogin')->name('glogin');
-Route::get('feeds', 'FeedController@feeds');
-
 //Mesage section
 Route::get('/messages', 'MessageController@show')->name('messages');
 Route::post('/storePhoneNumber', 'MessageController@storePhoneNumber')->name('storePhoneNumber');
@@ -91,16 +76,45 @@ Route::post('paytmPayment', 'OrderController@order')->name('paytm');
 Route::post('payment/status', 'OrderController@paymentCallback');
 
 //Product section
-Route::resource('products', 'ProductController');
-Route::get('productview', 'ProductController@productview')->name('productview');
+Route::resource('products', 'ShoppingController');
+
+Route::get('/', function () {
+		return view('welcome');
+	});
+
+Route::get('/home', function () {
+		return view('welcome');
+	});
+
+//user section  ###
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes(['verify' => true]);
+
+// Facebook socialite
+Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('fblogin');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+//Route::get('login/facebook/callback', 'Auth\LoginController@redirectTo');
+
+//Google Login using socialite
+Route::get('auth/google', 'Auth\LoginController@redirectToGoogle')->name('googlelogin');
+Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+//Google Login using google API Client
+Route::get('auth/google/callback', 'Auth\LoginController@googlelogin')->name('glogin');
+Route::get('feeds', 'FeedController@feeds');
+
+Route::get('product_view', 'ProductController@product_view')->name('product_view');
 Route::get('search', 'ProductController@search')->name('search');
 Route::group(['middleware' => 'auth'], function () {
-		Route::post('/addtocart/{id}', 'ProductController@addtocart')->name('addtocart');
-		Route::post('/addtowishlist/{id}', 'ProductController@addtowishlist')->name('addtowishlist');
-		Route::post('/removecart/{id}', 'ProductController@removecart')->name('removecart');
-		Route::post('/removewish/{id}', 'ProductController@removewish')->name('removewish');
-		Route::get('cart', 'ProductController@cartview')->name('cart');
-		Route::get('wishlist', 'ProductController@wishlistview')->name('wishlist');
+
+		Route::post('/add_to_cart/{id}', 'ProductController@add_to_cart')->name('add_to_cart');
+		Route::post('/add_to_wish_list/{id}', 'ProductController@add_to_wish_list')->name('add_to_wish_list');
+		Route::post('/remove_cart/{id}', 'ProductController@remove_cart')->name('remove_cart');
+		Route::post('/remove_wish/{id}', 'ProductController@remove_wish')->name('remove_wish');
+		Route::get('cart', 'ProductController@cart_view')->name('cart');
+		Route::get('wish_list', 'ProductController@wish_list_view')->name('wish_list');
 		Route::post('/paypal_payment/{id}', 'ProductController@paypal_payment')->name('paypal_payment');
 		Route::get('cancel', 'ProductController@cancel')->name('payment.cancel');
 		Route::get('payment/success', 'ProductController@success')->name('payment.success');
