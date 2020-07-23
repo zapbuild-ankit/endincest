@@ -58,7 +58,7 @@
 <style>
   .error{
     color:red;
-    font-style:italic;
+    font-style:arial;
     font-size:16px;
   }
 </style>
@@ -310,6 +310,7 @@
 
           </li>
 
+
           <li class="nav-item">
             <a href="{{route('import')}}" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
@@ -326,6 +327,17 @@
               <i class="nav-icon far fa-circle"></i>
               <p>
                 Products
+
+              </p>
+            </a>
+
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('coupons.index')}}" class="nav-link">
+              <i class="nav-icon fa fa-tag"></i>
+              <p>
+                  Coupons
 
               </p>
             </a>
@@ -792,7 +804,48 @@
         });
 
 
+//Coupon Validation
+        $("#coupon_form").validate({
+            rules: {
 
+                type: {
+                    required: true,
+
+
+                },
+                value:{
+                    required:true,
+
+                    noSpace:true,
+                },
+
+                percent_off:{
+                    required:true,
+
+                    noSpace:true,
+                },
+            },
+            messages:{
+
+                type: {
+                    required: "Please select Coupon type",
+
+                },
+                value: {
+                    required:"Please enter Fixed discount value",
+
+                },
+                percent_off: {
+                    required:"Please enter off Percentage",
+
+
+                },
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
 
 
 
