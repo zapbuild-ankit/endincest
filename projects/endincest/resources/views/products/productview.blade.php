@@ -2,6 +2,17 @@
 @section('title') Products @endsection
 @section('content')
 @if(!$products->isEmpty())
+ @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+             @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
 <h3 class='text-center' style='margin-bottom: 40px' ><b>PRODUCTS</b></h3>
 <div class='container-fluid' >
   @csrf

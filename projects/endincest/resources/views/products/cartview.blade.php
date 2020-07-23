@@ -39,11 +39,10 @@
 <?php $endpoint++?>
 <br><br>
        <div class="button">
-       <form method="post" action="{{route('paypal_payment',$product->id)}}">
-        @csrf
+      <form  method="get" action="{{route('checkout',$product->id)}}">
+      @csrf
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
-     </form>
-
+</form>
      <form  method="post" action="{{route('remove_cart',$product->id)}}">
       @csrf
        <button type="submit" class="btn btn-sm btn-danger button" onclick="return confirm('Are you sure, Want to Delete?')"><i class="fa fa-trash"></i></button>
@@ -65,9 +64,15 @@
 
 @endforeach
 
+</div>
+</div>
 
-</div>
-</div>
+         </div>
+
+
+
+
+
 @endif
 @if(empty($products))
 	<h2 align="center">No Product added to cart</h2>

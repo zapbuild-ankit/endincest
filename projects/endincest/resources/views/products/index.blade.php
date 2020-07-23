@@ -19,7 +19,7 @@
             <div class="tile">
                 <div class="tile-body">
                      <div class="table-responsive ct-one">
-                     <table class="table table-hover table-bordered" id="couponTable" width = "100%">
+                     <table class="table table-hover table-bordered" id="productTable" width = "100%">
                       <thead>
                     <tr>
                       <th scope="col">#</th>

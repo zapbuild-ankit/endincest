@@ -27,7 +27,7 @@
        <p>{{$product->description}}</p>
        <i class='fa fa-rupee'>{{$product->price}}</i><br><br>
         <div class="button">
-       <form method="post" action="{{route('paypal_payment',$product->id)}}">
+       <form method="get" action="{{route('checkout',$product->id)}}">
        @csrf
        <button type="submit"  class="btn btn-sm btn-success button">BUY NOW</button>
      </form>
