@@ -143,4 +143,5 @@ class ShoppingController extends Controller {
 		return redirect('/products')->with('success', 'Product is successfully deleted');
 
 	}
+
 }
