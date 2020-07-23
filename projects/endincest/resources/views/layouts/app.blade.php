@@ -21,10 +21,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel='stylesheet' href="{{asset('dist/css/checkout.css')}}">
 
     <!-- Scripts -->
 
-
+ <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
    <script src="{{asset('plugins/jquery-validation/jquery.validate.js')}}"></script>
@@ -32,7 +33,15 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=301891977876068&autoLogAppEvents=1" nonce="qXvuX05J"></script>
 
 
+<style>
+  .error{
+    color:red;
+    font-style:arial;
+    font-size:15px;
+  }
 
+
+</style>
 
 
 </head>
@@ -60,8 +69,8 @@
 
                                            <!-- SEARCH FORM -->
     <form class="form-inline ml-3"  action="{{ route('search') }}" method="GET" style="margin-right:10px;">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search"name="query" id="query" value="{{ request()->input('query') }}" placeholder="Search for product" aria-label="Search" required>
+      <div class="input-group input-group-sm SearchBar">
+        <input class="form-control form-control-navbar" type="search"name="query" id="query" value="{{ request()->input('query') }}" placeholder="Search for products " aria-label="Search" required>
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fa fa-search"></i>
@@ -159,7 +168,7 @@
                 },
                 password:{
                     required:true,
-                    letters_numbers_special:true,
+
                     noSpace:true,
                 },
             },
@@ -171,7 +180,7 @@
                 },
                 password: {
                     required:"Please enter password.",
-                    letters_numbers_special:"Password must contain one special character,uppercase and number.",
+
 
                 },
 
@@ -181,9 +190,116 @@
                 }
         });
 
+//Coupon validation
+
+ $("#coupon_fields").validate({
+            rules: {
+
+                coupon_code: {
+                    required: true,
+
+
+                },
+
+            },
+            messages:{
+
+                coupon_code: {
+                    required: "Please enter Coupon",
+
+                },
+
+
+            },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+        });
+
+
+
+//Order form Validation
+
+        $("#orders").validate({
+            rules: {
+
+                name: {
+                    required: true,
+                    onlyCharacter:true,
+
+
+                },
+                phone:{
+                    required:true,
+
+                    valid_contact_number:true,
+                },
+
+                 street1:{
+                    required:true,
+
+                },
+
+                 city:{
+                    required:true,
+
+                    onlyCharacter:true,
+                },
+
+                 state:{
+                    required:true,
+                },
+                 zip:{
+                    required:true,
+
+                },
+            },
+            messages:{
+
+                name: {
+                    required: "Please enter Your name",
+                    onlyCharacter:"Enter characters only"
+                },
+                phone: {
+                    required:"Please enter your phone number",
+                    valid_contact_number:"Enter 10 digits phone number"
+
+                },
+
+                street1: {
+                    required: "Please enter nearby address",
+                    onlyCharacter:"Enter characters only"
+                },
+
+                city: {
+                    required: "Please enter city",
+                    onlyCharacter:"Enter characters only"
+                },
+
+                state: {
+                    required: "Please select state",
+
+                },
+                zip: {
+                    required: "Please enter  pin code",
+
+                },
+
+            },
+
+submitHandler: function(form) {
+                    form.submit();
+                }
+
+
+        });
+
+
+
+
 
         </script>
-        <script src="{{asset('js/app.js')}}"></script>
+
 
        <script>
 
