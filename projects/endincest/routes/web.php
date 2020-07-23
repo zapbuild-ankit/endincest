@@ -78,6 +78,9 @@ Route::post('payment/status', 'OrderController@paymentCallback');
 //Product section
 Route::resource('products', 'ShoppingController');
 
+//Coupon Section
+Route::resource('coupons', 'CouponController');
+
 Route::get('/', function () {
 		return view('welcome');
 	});
@@ -118,5 +121,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/paypal_payment/{id}', 'ProductController@paypal_payment')->name('paypal_payment');
 		Route::get('cancel', 'ProductController@cancel')->name('payment.cancel');
 		Route::get('payment/success', 'ProductController@success')->name('payment.success');
+		Route::get('/checkout/{id}', 'ProductController@checkout_form')->name('checkout');
+		Route::post('/coupon_check/{id}', 'ProductController@coupon_check')->name('coupon_check');
+		Route::delete('coupon_remove', 'ProductController@coupon_remove')->name('coupon_remove');
 
 	});
